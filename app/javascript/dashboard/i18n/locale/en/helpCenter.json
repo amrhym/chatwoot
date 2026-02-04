@@ -744,6 +744,12 @@
           "HELP_TEXT": "Select a live chat widget that will appear on your help center",
           "NONE_OPTION": "No widget"
         },
+        "WEBRTC_VOICE_CHANNEL": {
+          "LABEL": "Voice call channel",
+          "PLACEHOLDER": "Select voice call channel",
+          "HELP_TEXT": "Select a WebRTC voice channel to add a call button to your help center",
+          "NONE_OPTION": "No voice channel"
+        },
         "BRAND_COLOR": {
           "LABEL": "Brand color"
         },

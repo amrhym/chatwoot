@@ -95,6 +95,13 @@ const channelList = computed(() => {
     icon: 'i-ri-phone-fill',
   });
 
+  channels.push({
+    key: 'webrtc',
+    title: t('INBOX_MGMT.ADD.AUTH.CHANNEL.WEBRTC.TITLE'),
+    description: t('INBOX_MGMT.ADD.AUTH.CHANNEL.WEBRTC.DESCRIPTION'),
+    icon: 'i-ri-headphone-fill',
+  });
+
   return channels;
 });
 

@@ -43,6 +43,7 @@ const state = reactive({
   widgetColor: '',
   homePageLink: '',
   liveChatWidgetInboxId: '',
+  webrtcVoiceInboxId: '',
   logoUrl: '',
   avatarBlobId: '',
 });
@@ -64,6 +65,26 @@ const liveChatWidgets = computed(() => {
       label: t('HELP_CENTER.PORTAL_SETTINGS.FORM.LIVE_CHAT_WIDGET.NONE_OPTION'),
     },
     ...widgetOptions,
+  ];
+});
+
+const webrtcVoiceChannels = computed(() => {
+  const inboxes = store.getters['inboxes/getInboxes'];
+  const channelOptions = inboxes
+    .filter(inbox => inbox.channel_type === 'Channel::Webrtc')
+    .map(inbox => ({
+      value: inbox.id,
+      label: inbox.name,
+    }));
+
+  return [
+    {
+      value: '',
+      label: t(
+        'HELP_CENTER.PORTAL_SETTINGS.FORM.WEBRTC_VOICE_CHANNEL.NONE_OPTION'
+      ),
+    },
+    ...channelOptions,
   ];
 });
 
@@ -117,6 +138,7 @@ watch(
         homePageLink: newVal.homepage_link,
         slug: newVal.slug,
         liveChatWidgetInboxId: newVal.inbox?.id || '',
+        webrtcVoiceInboxId: newVal.webrtc_inbox?.id || '',
       });
       if (newVal.logo) {
         const {
@@ -149,6 +171,7 @@ const handleUpdatePortal = () => {
     homepage_link: state.homePageLink,
     blob_id: state.avatarBlobId,
     inbox_id: state.liveChatWidgetInboxId,
+    webrtc_inbox_id: state.webrtcVoiceInboxId,
   };
   emit('updatePortal', portal);
 };
@@ -319,6 +342,34 @@ const handleAvatarDelete = () => {
           "
           :message="
             t('HELP_CENTER.PORTAL_SETTINGS.FORM.LIVE_CHAT_WIDGET.HELP_TEXT')
+          "
+          class="[&>div>button:not(.focused)]:!outline-n-weak"
+        />
+      </div>
+      <div
+        class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
+      >
+        <label
+          class="text-sm font-medium whitespace-nowrap py-2.5 text-n-slate-12"
+        >
+          {{
+            t(
+              'HELP_CENTER.PORTAL_SETTINGS.FORM.WEBRTC_VOICE_CHANNEL.LABEL'
+            )
+          }}
+        </label>
+        <ComboBox
+          v-model="state.webrtcVoiceInboxId"
+          :options="webrtcVoiceChannels"
+          :placeholder="
+            t(
+              'HELP_CENTER.PORTAL_SETTINGS.FORM.WEBRTC_VOICE_CHANNEL.PLACEHOLDER'
+            )
+          "
+          :message="
+            t(
+              'HELP_CENTER.PORTAL_SETTINGS.FORM.WEBRTC_VOICE_CHANNEL.HELP_TEXT'
+            )
           "
           class="[&>div>button:not(.focused)]:!outline-n-weak"
         />

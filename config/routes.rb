@@ -587,6 +587,12 @@ Rails.application.routes.draw do
     end
   end
 
+  if ChatwootApp.enterprise?
+    get '/webrtc/room', to: 'webrtc_rooms#show', as: 'webrtc_room'
+    post '/webrtc/room/join', to: 'webrtc_rooms#join', as: 'webrtc_room_join'
+    post '/webrtc/room/leave', to: 'webrtc_rooms#leave', as: 'webrtc_room_leave'
+  end
+
   get 'microsoft/callback', to: 'microsoft/callbacks#show'
   get 'google/callback', to: 'google/callbacks#show'
   get 'instagram/callback', to: 'instagram/callbacks#show'

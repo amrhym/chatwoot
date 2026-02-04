@@ -62,6 +62,9 @@ export default {
     isAVoiceChannel() {
       return this.channelType === INBOX_TYPES.VOICE;
     },
+    isAWebrtcChannel() {
+      return this.channelType === INBOX_TYPES.WEBRTC;
+    },
     isAnEmailChannel() {
       return this.channelType === INBOX_TYPES.EMAIL;
     },

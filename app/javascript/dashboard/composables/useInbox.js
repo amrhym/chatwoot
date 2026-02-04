@@ -138,6 +138,10 @@ export const useInbox = (inboxId = null) => {
     return channelType.value === INBOX_TYPES.VOICE;
   });
 
+  const isAWebrtcChannel = computed(() => {
+    return channelType.value === INBOX_TYPES.WEBRTC;
+  });
+
   return {
     inbox,
     isAFacebookInbox,
@@ -157,5 +161,6 @@ export const useInbox = (inboxId = null) => {
     isAnInstagramChannel,
     isATiktokChannel,
     isAVoiceChannel,
+    isAWebrtcChannel,
   };
 };

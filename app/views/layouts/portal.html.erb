@@ -154,6 +154,9 @@ By default, it renders:
       tocHeader: '<%= I18n.t('public_portal.toc_header') %>'
     };
   </script>
+  <% if @portal.channel_webrtc.present? && !@is_plain_layout_enabled %>
+  <%= @portal.channel_webrtc.webrtc_widget_script.html_safe %>
+  <% end %>
   <% if @portal.channel_web_widget.present? && !@is_plain_layout_enabled %>
   <%= @portal.channel_web_widget.web_widget_script.html_safe %>
   <% end %>

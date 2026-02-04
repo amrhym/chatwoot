@@ -23,6 +23,12 @@ if portal.channel_web_widget
   end
 end
 
+if portal.channel_webrtc
+  json.webrtc_inbox do
+    json.partial! 'api/v1/models/inbox', formats: [:json], resource: portal.channel_webrtc.inbox
+  end
+end
+
 json.logo portal.file_base_data if portal.logo.present?
 
 json.meta do

@@ -353,6 +353,43 @@
           "ERROR_MESSAGE": "We were not able to create the voice channel"
         }
       },
+      "WEBRTC": {
+        "TITLE": "WebRTC Voice Channel",
+        "DESC": "Set up a WebRTC voice channel using LiveKit to let visitors call your team directly from your help center.",
+        "CHANNEL_NAME": {
+          "LABEL": "Channel Name",
+          "PLACEHOLDER": "Enter a name for this channel",
+          "ERROR": "Channel name is required"
+        },
+        "WEBSITE_URL": {
+          "LABEL": "Website URL (optional)",
+          "PLACEHOLDER": "https://example.com"
+        },
+        "LIVEKIT": {
+          "URL": {
+            "LABEL": "LiveKit Server URL",
+            "PLACEHOLDER": "wss://your-livekit-server.com",
+            "REQUIRED": "LiveKit server URL is required",
+            "HINT": "Optional. Falls back to LIVEKIT_URL environment variable if left empty."
+          },
+          "API_KEY": {
+            "LABEL": "LiveKit API Key",
+            "PLACEHOLDER": "Enter your LiveKit API Key",
+            "REQUIRED": "LiveKit API Key is required",
+            "HINT": "Optional. Falls back to LIVEKIT_API_KEY environment variable if left empty."
+          },
+          "API_SECRET": {
+            "LABEL": "LiveKit API Secret",
+            "PLACEHOLDER": "Enter your LiveKit API Secret",
+            "REQUIRED": "LiveKit API Secret is required",
+            "HINT": "Optional. Falls back to LIVEKIT_API_SECRET environment variable if left empty."
+          }
+        },
+        "SUBMIT_BUTTON": "Create WebRTC Voice Channel",
+        "API": {
+          "ERROR_MESSAGE": "We were not able to create the WebRTC voice channel"
+        }
+      },
       "API_CHANNEL": {
         "TITLE": "API Channel",
         "DESC": "Integrate with API channel and start supporting your customers.",
@@ -485,6 +522,10 @@
           "VOICE": {
             "TITLE": "Voice",
             "DESCRIPTION": "Integrate with Twilio Voice"
+          },
+          "WEBRTC": {
+            "TITLE": "WebRTC Voice",
+            "DESCRIPTION": "Audio calls via LiveKit WebRTC"
           }
         }
       },
@@ -1051,7 +1092,8 @@
       "API": "API Channel",
       "INSTAGRAM": "Instagram",
       "TIKTOK": "TikTok",
-      "VOICE": "Voice"
+      "VOICE": "Voice",
+      "WEBRTC": "WebRTC Voice"
     }
   }
 }

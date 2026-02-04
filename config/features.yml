@@ -241,3 +241,7 @@
   display_name: Required Conversation Attributes
   enabled: false
   premium: true
+- name: channel_webrtc
+  display_name: WebRTC Voice Channel
+  enabled: false
+  premium: true

@@ -15,7 +15,7 @@ class Api::V1::Accounts::PortalsController < Api::V1::Accounts::BaseController
   end
 
   def create
-    @portal = Current.account.portals.build(portal_params.merge(live_chat_widget_params))
+    @portal = Current.account.portals.build(portal_params.merge(live_chat_widget_params).merge(webrtc_channel_params))
     @portal.custom_domain = parsed_custom_domain
     @portal.save!
     process_attached_logo
@@ -23,7 +23,7 @@ class Api::V1::Accounts::PortalsController < Api::V1::Accounts::BaseController
 
   def update
     ActiveRecord::Base.transaction do
-      @portal.update!(portal_params.merge(live_chat_widget_params)) if params[:portal].present?
+      @portal.update!(portal_params.merge(live_chat_widget_params).merge(webrtc_channel_params)) if params[:portal].present?
       # @portal.custom_domain = parsed_custom_domain
       process_attached_logo if params[:blob_id].present?
     rescue ActiveRecord::RecordInvalid => e
@@ -92,6 +92,17 @@ class Api::V1::Accounts::PortalsController < Api::V1::Accounts::BaseController
     return {} unless inbox.web_widget?
 
     { channel_web_widget_id: inbox.channel.id }
+  end
+
+  def webrtc_channel_params
+    permitted_params = params.permit(:webrtc_inbox_id)
+    return {} unless permitted_params.key?(:webrtc_inbox_id)
+    return { channel_webrtc_id: nil } if permitted_params[:webrtc_inbox_id].blank?
+
+    inbox = Inbox.find(permitted_params[:webrtc_inbox_id])
+    return {} unless inbox.channel_type == 'Channel::Webrtc'
+
+    { channel_webrtc_id: inbox.channel.id }
   end
 
   def set_current_page

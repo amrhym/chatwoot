@@ -10,13 +10,15 @@ module Enterprise::Api::V1::Accounts::InboxesController
   private
 
   def allowed_channel_types
-    super + ['voice']
+    super + %w[voice webrtc]
   end
 
   def channel_type_from_params
     case permitted_params[:channel][:type]
     when 'voice'
       Channel::Voice
+    when 'webrtc'
+      Channel::Webrtc
     else
       super
     end
@@ -26,6 +28,8 @@ module Enterprise::Api::V1::Accounts::InboxesController
     case permitted_params[:channel][:type]
     when 'voice'
       Current.account.voice_channels
+    when 'webrtc'
+      Current.account.webrtc_channels
     else
       super
     end
